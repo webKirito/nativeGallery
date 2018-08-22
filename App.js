@@ -1,41 +1,40 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import React, {Component} from 'react'
+import {StyleSheet, Text, View} from 'react-native'
+import Header from './src/Components/Header'
+import Gallery from './src/Components/Gallery'
 
 
 export default class App extends Component {
+  
+  state = {
+    imageArr : []
+  }
+
+  componentDidMount = async () => {
+    const CLIENT_ID = 'cf49c08b444ff4cb9e4d126b7e9f7513ba1ee58de7906e4360afc1a33d1bf4c0'
+    try {
+      const resp = await fetch(`https://api.unsplash.com/photos/?client_id=${CLIENT_ID}`)
+      const data = await resp.json()
+      console.log(data)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+  
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+      <View style={styles.main}>
+        
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  main: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  }
 });

@@ -1,24 +1,34 @@
-import React, {Component} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {Component} from 'react'
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 
-export default Header = () => {
-    const {header , headerTxt} = styles
+const {img , container} = styles
+
+const galleryItem = (url) => {
     return (
-      <View style={header}>
-        <Text style={headerTxt}>Open up App.js to start working on your app!</Text>
-      </View>
+        <Image source={url} style = {img}></Image>
+    )
+}
+
+export default Gallery = ({props}) => {
+    return (
+      <ScrollView style={container}>
+        {
+            this.props.imageArr.map(item => {<galleryItem url = {item.url} key = {item.id}/>})
+        }
+      </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
-  header: {
+  container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'blue',
   },
-  headerTxt : {
-      fontSize : 20
-  }
-
+  img : {
+    width: 20,
+    height: 20
+  },
 });
